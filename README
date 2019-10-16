@@ -1,0 +1,134 @@
+# Blog/Forum
+
+Using:
+
+REST API
+Spring Boot
+Spring JPA Data
+MySQL
+Hibernate
+Eclipse
+Maven
+
+////////////////
+//////////////
+
+Model:
+
+1. Author
+	- id (primary)
+	- firstName
+	- lastName
+	- posts @OneToMany
+	
+2. Post
+	- id (primary)
+	- title
+	- content (max 5000)
+	- comments (not fully implemented)
+	- author @ManyToOne (foreign key)
+	- category @ManyToOne (foreign key)
+
+3. Category
+	- id (primary)
+	- name
+	- posts @OneToMany
+	
+
+///////////////////////
+//////////////////////
+
+Possible Methods:
+localhost:8082
+
+/author
+
+	GET - return all authors and their properties
+	{
+        "id": 101,
+        "firstName": "Viren",
+        "lastName": "Patel"
+    }
+
+/author/{id}
+
+	GET - get specific author with{id} and properties
+
+/author/add
+
+	POST - parse JSON in @RequestBody and add to database
+
+/author/update
+
+	PUT - parse the JSON in @RequestBody and update database
+	
+/author/delete/{id}
+
+	DELETE - delte the author with {id}
+	
+/post
+
+	GET - all posts and properties
+	{
+        "id": 1003,
+        "title": "Iphone 11",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut erat aliquam, finibus urna sed, tincidunt eros. Pellentesque vitae urna mattis, aliquet est id, placerat ex. Nulla facilisi. Vivamus quis elementum ligula. Cras a orci vitae turpis tincidunt egestas ut quis elit. Morbi convallis lectus sit amet lectus tristique, eget porta nisl ullamcorper. Curabitur orci velit, rhoncus et dolor et, sagittis finibus leo. Pellentesque nec semper mi, vitae aliquam eros. Quisque cursus tempus suscipit. Morbi volutpat euismod sem sed pulvinar. Vivamus ullamcorper, velit tristique vulputate aliquam, justo eros malesuada ante, non consequat sapien mi vel tellus. Donec commodo elit sed tortor mollis pharetra. Proin tempus quis elit in pellentesque. Proin condimentum pellentesque quam, quis vestibulum augue.",
+        "author": {
+            "id": 102,
+            "firstName": "Jay",
+            "lastName": "Dave"
+        },
+        "comments": null,
+        "category": {
+            "id": 2,
+            "name": "Technology"
+        }
+    }
+	
+/post/{id}
+
+	GET - post with {id} and properties
+	
+/post/add
+
+	POST - parse JSON from @RequestBody and add to database
+
+/post/update
+
+	PUT - parse JSON from @RequestBody and update database
+	
+/post/delete
+
+	DELETE - delete post with {id} from database
+	
+/category
+
+	GET - all categories and name property
+	{
+        "id": 1,
+        "name": "Politics"
+    }
+	
+/category/id/{id}
+
+	GET - get category {id}
+
+/category/name/{name}
+
+	GET - get category with {name}
+	
+/category/add
+
+	POST - parse JSON from @RequestBody and add to database
+	
+/category/update
+
+	PUT - parse JSON from @RequestBody and update database
+	
+/category/delete/id/{id}
+
+	DELETE - delete according to {id}
+
+/category/delete/name/{name}
+
+	DELETE - delete according to {name}
